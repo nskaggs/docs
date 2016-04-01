@@ -17,7 +17,7 @@ To get the best experience, as well as Juju, this guide will also set up:
 
 Both the above are provided with Ubuntu 16.04LTS.
 
-## Installing the software
+# Installing the software
 
 Run the following commands to install the required software:
 
@@ -29,7 +29,7 @@ Run the following commands to install the required software:
   sudo apt install juju2
 ```
 
-## Preparing ZFS
+# Preparing ZFS
 
 Using ZFS we can create sparse backing-storage for any of the containers which
 LXD creates for Juju. You can create this storage anywhere (e.g. the fastest
@@ -47,7 +47,7 @@ the following command:
 
 This should indicate that the newly created pool is 'ONLINE' and ready.
 
-## Initialise LXD
+# Initialise LXD
 
 Now we need to tell LXD about this storage
 
@@ -57,12 +57,12 @@ newgrp -
 ```
 
 To have the group changes take effect, you will now need to logout of your
-current session and log in once again, or execure the following in your shell:
+current session and log in once again, or execute the following in your shell:
   
 ```no-highlight
 su -l $USER
 ```
-## Createa controller
+# Create a controller
 
 Juju needs to create a controller instance in the cloud to manage the models
 you create. We use the `juju bootstrap` command to create that controller. For 
@@ -88,7 +88,7 @@ CONTROLLER       MODEL    USER         SERVER
 local.lxd-test*  default  admin@local  10.0.3.124:17070
 ```
 
-## Create a model
+# Create a model
 
 Before we deploy any services, we will create a model. A model in Juju is like a 
 workspace where you can deploy and relate the services you want. A controller 
@@ -111,7 +111,7 @@ juju switch
 ```no-highlight
 local.lxd-test:test
 ```
-## Deploying services
+# Deploying services
 
 Juju is now ready to deploy any services from the hundreds included in the
 [https://jujucharms.com](juju charm store). It is a good idea to test your new 
@@ -120,7 +120,7 @@ model. How about a Mediawiki site?
 ```bash
 juju deploy mediawiki-single
 ```
-This will fetch a 'bundle' from the Juju store. A bundle is a pre=packaged set
+This will fetch a 'bundle' from the Juju store. A bundle is a pre-packaged set
 of services, in this case the 'Mediawiki' service, and a database to run it 
 with. Juju will install both these services and add a relation between them - 
 this is part of the magic of Juju: it isn't just about deploying services, Juju 
@@ -137,7 +137,50 @@ something like this:
 
 ![juju status](./media/juju-mediawiki-status.png)
 
+There is quite a lot of information there but the important parts for now are 
+the [Services] section, which show that mediawiki and mysql are installed, and
+the  [Units] section, which crucially shows the IP addresses allocated to them.
+
+By default, Juju is secure - you won't be able to connect to any services 
+unless they are specifically exposed. This adjusts the relevant firewall 
+controls (on any cloud, not just LXD) to allow external access. To make
+our Mediawiki visible, we run the command:
+
+```bash
+juju expose mediawiki
+```
+
+From the status output, we can see that the Mediawiki service is running on 
+10.0.3.60 (your IP may vary). If we open up Firefox now and point it at that 
+address, you should see the site running.
+
+!["mediawiki site"](./media/juju-mediawiki-site.png)
+
+Congratulations, you have just deployed a service with Juju!
+
+!!! Note: To remove all the services in the model you just created, it is 
+quickest to destroy the model (` juju destroy-model test`) and create a new 
+one.
 
 
+## Next Steps
+
+Now you have a Juju-powered cloud, it is time to explore the amazing things you
+can do with it! 
+
+We suggest you take the time to read the following:
+  
+  - [Juju concepts][concepts] - This page explains the terminology used 
+    throughout this documentation and describes what Juju can do. 
+  - [Clouds][clouds] goes into detail about configuring clouds, including the 
+    'local' cloud, which is great for lightning fast testing and development.
+  - [Charms/Services][charms] - find out how to construct complicated workloads 
+    in next to no time.
 
 
+[clouds]: ./clouds.html  "Configuring Juju Clouds"
+[charm store]: https://jujucharms.com "Juju Charm Store"
+[releases]: reference-releases.html 
+[keygen]: ./getting-started-keygen-win.html "How to generate an SSH key with Windows"
+[concepts]: ./juju-concepts.html "Juju concepts"
+[charms]: ./charms-intro.html
