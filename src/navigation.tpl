@@ -4,15 +4,33 @@
         <ul>
         <li><a href="about-juju.html">About Juju</a></li>
         <li><a href="introducing-2.html">Introducing Juju 2.0!</a></li>
-        <li><a href="getting-started.html">Getting Started</a></li>
-        <li><a href="juju-concepts.html">Juju concepts</a></li>
-        <li><a href="getting-started-general.html">Install &amp; Configure</a></li>
-        <li class="section"><a class="header" href="clouds.html">Clouds</a>
+        <li class="section"><a class="header" href="getting-started.html">Getting Started</a>
             <ul class="sub">
-                <li><a href="credentials.html">Credentials</a></li>
+                <li><a href="getting-started-general.html">Install for non-16.04</a></li>
             </ul>
         </li>
-        <li><a href="controllers.html">Controllers</a></li>
+        <li><a href="juju-concepts.html">Juju concepts</a></li>
+        <li class="section"><a class="header" href="clouds.html">Clouds</a>
+            <ul class="sub">
+                <li><a href="credentials.html">Cloud credentials</a></li>
+                <li><a href="help-aws.html">Amazon AWS</a></li>
+                <li><a href="help-azure.html">Microsoft Azure</a></li>
+                <li><a href="help-google.html">Google GCE</a></li>
+                <li><a href="help-joyent.html">Joyent</a></li>
+                <li><a href="clouds-LXD.html">LXD</a></li>
+                <li><a href="clouds-maas.html">MAAS</a></li>
+                <li><a href="clouds-manual.html">Manual</a></li>
+                <li><a href="help-rackspace.html">Rackspace</a></li>
+            </ul>
+        </li>
+        <li class="section><a href="controllers.html">Controllers</a>
+            <ul class="sub">
+                <li><a href="controllers-creating.html">Create/Bootstrap</a></li>
+                <li><a href="controllers-gui.html">Juju GUI</a></li>
+                <li><a href="controllers-ha.html">High Availability</a></li>
+                <li><a href="controllers-backup.html">Backups</a></li>
+            </ul>
+        </li>
         <li><a href="models.html">Models</a></li>
         <li class="section"><a class="header" href="charms.html">Charms & applications</a>
             <ul class="sub">
@@ -46,6 +64,7 @@
                 <li><a href="juju-block.html">Restrict/block Juju commands</a></li>
                 <li><a href="juju-centos.html">CentOS support</a></li>
                 <li><a href="network-spaces.html">Network spaces</a></li>
+                <li><a href="juju-plugins.html">Juju plugins</a></li>
                 <li><a href="juju-misc.html">Miscellaneous</a></li>
             </ul>
         </li>
@@ -144,7 +163,6 @@
                 <li><a href="authors-hook-debug-dhx.html">Hook Debugging with DHX</a></li>
                 <li><a href="authors-subordinate-services.html">Subordinate services</a></li>
                 <li><a href="authors-implicit-relations.html">Implicit Relations</a></li>
-                <li><a href="authors-testing.html">Charm Testing</a></li>
                 <li><a href="authors-charm-building.html">Building a Charm from Layers</a></li>
             </ul>
         </li>

@@ -2,16 +2,14 @@ Title: Juju Controllers
 TODO:  Figure out the 'block command' situation (including CLI help
          text). See 'Restricting command usage' section. The old page lives on.
        Need examples for each command.
-       Figure out how to present those examples due to the foldout bug not
-         allowing syntax highlighting. So far, under 'Creating a controller'
-         there is a link to the old creating page.
+       .
 
 
 # Controllers
 
 A Juju *controller* is the management node of a Juju cloud environment. In
 particluar, it houses the database and keeps track of all the models in that
-environment. Although it is a special node, it is nonetheless a machine that
+environment. Although it is a special node, it is a machine that
 gets created by Juju (during the "bootstrap" stage) and, in that sense, is
 similar to other Juju machines.
 
@@ -20,17 +18,17 @@ and the 'default' model. The primary purpose of the 'controller' model is to
 run and manage the Juju API server and the underlying database. Additional
 models may be created by the user - see [Models](./models.html).
 
-When a controller is intended to be used by multiple people, it is recommended
-that Juju's [multi-user functionality](./users.html) be leveraged.
-
 Since a controller can host multiple models, the destruction of a controller
 must be done with ample consideration since all its models will be destroyed
 along with it.
 
+In some circumstances you may wish to share a controller or one of its associated
+models. Juju provides [multi-user functionality](./users.html) for this purpose.
+
 
 ## Controller management
 
-Common controller management tasks are summarized below.
+Common tasks are summarized below.
 
 
 ^# Create a controller
@@ -46,23 +44,14 @@ Common controller management tasks are summarized below.
    bootstrap` command.
 
 
-
-^# Implement HA (high availability)
-
-   High availability in Juju provides resilience to the services offered by a
-   Juju controller. To be clear, Juju HA does not affect any other Juju machines,
-   and thus any workload services, associated with the controller's models.
-
-   This is a complex subject. See [Juju HA](./controllers-ha.html).
-
-
-
 ^# List controllers
    
    Use the `juju list-controllers` command to list all controllers knowable by
    the current system user.
 
-   `juju list-controllers [options]`
+         juju list-controllers [options] 
+   
+   The currently active controller is indicated in the list with an asterisk('*').
    
    For complete explanation, syntax and examples see the
    [command reference page](./commands.html#list-controllers) or the `juju help
@@ -76,7 +65,7 @@ Common controller management tasks are summarized below.
    Information includes UUID, API endpoints, certificates, and bootstrap
    configuarion.
 
-   `juju show-controller [options]`
+         juju show-controller [options]
    
    For complete explanation, syntax and examples see the
    [command reference page](./commands.html#show-controller) or the `juju help
@@ -88,7 +77,7 @@ Common controller management tasks are summarized below.
    
    Use the `juju destroy-controller` command to remove a controller.
 
-   `juju destroy-controller [options]`
+         juju destroy-controller [options]
    
    For complete explanation, syntax and examples see the
    [command reference page](./commands.html#destroy-controller) or the `juju help
@@ -104,14 +93,23 @@ Common controller management tasks are summarized below.
    of the `juju destroy-controller` command and failover to the more drastic
    behaviour if that attempt fails.
    
-   `juju kill-controller [options]`
+         juju kill-controller [options]
    
    For complete explanation, syntax and examples see the
    [command reference page](./commands.html#kill-controller) or the `juju help
    kill-controller` command.
 
 
+^# Use the Juju GUI
+   
+   Each Juju controller creates a web-driven GUI as an alternative method of
+   management. The GUI is capable of deploying, scaling and monitoring
+   applications, as well as more advanced operations.
+   
+   More details on the GUI can be found in the [Juju GUI section][gui].
+   
 
+   
 ^# Back up a controller
    
    Juju allows one to create, restore and manage backup files containing the
@@ -122,14 +120,17 @@ Common controller management tasks are summarized below.
 
    Note: coverage of client backups are included in the above resource.
 
+   
+ 
+ 
+^# Implement HA (high availability)
 
+   Each Juju controller can be made 'Highly Available' to add resilience to the
+   operations of the controller itself. This topic is covered in more detail in
+   the [Juju HA][ha] documentation.
+   HA for the applications deployed is a matter for the charms, and is covered
+   in a separate topic,[charm HA][charm-ha].
 
-^# Use the controller GUI
-   
-   The Juju GUI is a frontend for managing controllers (and their models).
-   
-   This topic is treated in [Juju GUI](./controllers-gui.html).
-   
    
 
 ^# Restricting command usage
@@ -141,9 +142,7 @@ Common controller management tasks are summarized below.
    This topic is treated in
    [Restricting changes to the running Juju environment](./juju-block.html).
 
-<!--
-The above should really be
-[Users and models](./users-models.html#block-user-commands).
-Even though these block commands appear to operate across controllers and
-not models.
--->
+
+[gui]: ./controllers-gui.html
+[ha]: ./controllers-ha.html
+[charm-ha]: ./charms-ha
